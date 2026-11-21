@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] — 2026-11-21
+
+### UI/UX Refinement & Responsive Perfection (Design Polish)
+
+#### Desktop Header
+- Re-architected desktop header into a balanced 3-zone layout (Zone 1: Left Brand Wordmark + Tagline, Zone 2: Center Navigation with `whitespace-nowrap`, Zone 3: Right Actions with standardized touch targets and discreet Admin CTA).
+- Switched desktop navigation breakpoint to `xl:flex` (1280px+) with `xl:hidden` for mobile drawer to eliminate text wrapping on 1024px–1279px screens.
+
+#### Responsive & Mobile Perfection
+- Solved 320px micro-viewport horizontal overflow (`scrollWidth == clientWidth == 320px`).
+- Wrapped hero ambient blur elements in `<div className="absolute inset-0 overflow-hidden pointer-events-none">`.
+- Added body scroll locking (`overflow: hidden`) and Escape key listeners to Cart Drawer, Catalog Mobile Filter Drawer, and Admin Modals.
+- Implemented responsive management cards for Admin Console on mobile screens (<768px), preventing table squishing.
+- Aligned product card titles (`min-h-[2.8rem]`) and subtitles (`min-h-[2.25rem]`) across all catalog grids.
+
+#### Verification & Quality Assurance
+- Automated Playwright suite expanded to 12 tests, achieving 100% PASS rate.
+- Docker multi-stage standalone container rebuilt and verified healthy on port 3102.
+- Created `UI_UX_AUDIT.md`, `RESPONSIVE_AUDIT.md`, and `VISUAL_REGRESSION_REPORT.md`.
+
 ## [1.0.0] — 2026-11-20
 
 ### Initial Release — BSES Flagship Portfolio Demonstration

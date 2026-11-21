@@ -152,59 +152,57 @@ export function Header({ locale, onOpenSearch, onOpenCart }: Props) {
         </div>
       </div>
 
-      {/* 2. Main Navigation Bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 gap-4">
-          {/* Mobile Menu Hamburger Button */}
-          <div className="flex items-center lg:hidden">
+      {/* 2. Main Navigation Bar (3-Zone Balanced Architecture) */}
+      <div className="max-w-7xl mx-auto px-2.5 min-[360px]:px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20 gap-2 sm:gap-4 lg:gap-8">
+          {/* ZONE 1: Left - Mobile Toggle + Brand Wordmark */}
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+            {/* Mobile Menu Hamburger Button */}
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="touch-target p-2 rounded-xl text-espresso hover:bg-rose-mist/60 transition-colors"
+              className="touch-target p-2 rounded-xl text-espresso hover:bg-rose-mist/60 transition-colors xl:hidden"
               aria-label={t.nav.menu}
             >
               <Menu className="w-6 h-6" />
             </button>
-          </div>
 
-          {/* Brand Wordmark */}
-          <div className="flex flex-col items-center lg:items-start text-center lg:text-start">
             <Link
               href={`/${locale}`}
-              className="group flex flex-col items-center lg:items-start focus-visible:outline-none"
+              className="group flex flex-col items-start focus-visible:outline-none"
             >
-              <span className="font-editorial text-3xl sm:text-4xl tracking-[0.18em] font-medium text-espresso group-hover:text-rose-dusty transition-colors">
+              <span className="font-editorial text-2xl min-[360px]:text-3xl sm:text-4xl tracking-[0.12em] sm:tracking-[0.16em] font-medium text-espresso group-hover:text-rose-dusty transition-colors leading-none">
                 {locale === 'ar' ? 'لوميا LUMÉA' : 'LUMÉA'}
               </span>
-              <span className="text-[10px] uppercase tracking-[0.28em] text-rose-dusty -mt-1 font-sans">
+              <span className="hidden min-[380px]:inline-block text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-rose-dusty mt-1 font-sans font-medium">
                 {t.tagline}
               </span>
             </Link>
           </div>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-7 rtl:space-x-reverse text-sm font-medium">
+          {/* ZONE 2: Center - Desktop Navigation Links (Balanced & Non-Wrapping) */}
+          <nav className="hidden xl:flex items-center justify-center gap-6 2xl:gap-8 flex-1 mx-4 text-sm font-medium">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative py-2 transition-colors hover:text-rose-dusty ${
+                className={`relative py-1.5 transition-colors whitespace-nowrap hover:text-rose-dusty ${
                   link.highlight
-                    ? 'text-rose-deep font-semibold flex items-center gap-1.5'
+                    ? 'text-rose-deep font-semibold flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-mist/60 border border-rose-border/60 shadow-xs'
                     : 'text-espresso/90'
                 }`}
               >
-                {link.highlight && <Sparkles className="w-3.5 h-3.5 text-rose-dusty animate-pulse" />}
+                {link.highlight && <Sparkles className="w-3.5 h-3.5 text-rose-dusty shrink-0" />}
                 <span>{link.label}</span>
               </Link>
             ))}
           </nav>
 
-          {/* Header Action Icons */}
-          <div className="flex items-center space-x-1 sm:space-x-2 rtl:space-x-reverse">
+          {/* ZONE 3: Right - Actions & Discreet Admin Shortcut */}
+          <div className="flex items-center shrink-0 gap-0.5 sm:gap-2">
             {/* Search Trigger */}
             <button
               onClick={onOpenSearch}
-              className="touch-target p-2.5 rounded-full text-espresso hover:bg-rose-mist/50 transition-colors"
+              className="touch-target p-2 sm:p-2.5 rounded-full text-espresso hover:bg-rose-mist/60 transition-colors"
               aria-label={t.nav.search}
             >
               <Search className="w-5 h-5 text-espresso" />
@@ -213,7 +211,7 @@ export function Header({ locale, onOpenSearch, onOpenCart }: Props) {
             {/* Wishlist Link with Badge */}
             <Link
               href={`/${locale}/wishlist`}
-              className="relative touch-target p-2.5 rounded-full text-espresso hover:bg-rose-mist/50 transition-colors"
+              className="relative touch-target p-2 sm:p-2.5 rounded-full text-espresso hover:bg-rose-mist/60 transition-colors"
               aria-label={t.nav.wishlist}
             >
               <Heart className="w-5 h-5 text-espresso" />
@@ -227,7 +225,7 @@ export function Header({ locale, onOpenSearch, onOpenCart }: Props) {
             {/* Cart Trigger with Badge */}
             <button
               onClick={onOpenCart}
-              className="relative touch-target p-2.5 rounded-full text-espresso hover:bg-rose-mist/50 transition-colors"
+              className="relative touch-target p-2 sm:p-2.5 rounded-full text-espresso hover:bg-rose-mist/60 transition-colors"
               aria-label={t.nav.cart}
             >
               <ShoppingBag className="w-5 h-5 text-espresso" />
@@ -241,11 +239,11 @@ export function Header({ locale, onOpenSearch, onOpenCart }: Props) {
             {/* Admin Console Demo Shortcut */}
             <Link
               href={`/${locale}/admin-demo`}
-              className="hidden sm:inline-flex items-center gap-1.5 ml-2 px-3 py-1.5 rounded-full bg-sand-warm/60 hover:bg-sand-warm text-espresso text-xs font-medium border border-sand-dark/20 transition-all"
+              className="hidden sm:inline-flex items-center gap-1.5 ms-1 sm:ms-2 px-3.5 py-2 rounded-full bg-sand-warm/70 hover:bg-sand-warm text-espresso text-xs font-semibold border border-sand-dark/20 transition-all shadow-xs"
               title={t.nav.adminDemo}
             >
               <Settings className="w-3.5 h-3.5 text-rose-dusty" />
-              <span className="hidden xl:inline">{t.nav.adminDemo}</span>
+              <span className="hidden 2xl:inline">{t.nav.adminDemo}</span>
             </Link>
           </div>
         </div>
@@ -257,7 +255,7 @@ export function Header({ locale, onOpenSearch, onOpenCart }: Props) {
           role="dialog"
           aria-modal="true"
           aria-label={t.nav.menu}
-          className="fixed inset-0 z-50 lg:hidden flex"
+          className="fixed inset-0 z-50 xl:hidden flex"
         >
           {/* Backdrop with Click to Close */}
           <div
@@ -279,7 +277,7 @@ export function Header({ locale, onOpenSearch, onOpenCart }: Props) {
                 onClick={() => setMobileMenuOpen(false)}
                 className="font-editorial text-2xl tracking-[0.16em] font-medium text-espresso"
               >
-                LUMÉA
+                {locale === 'ar' ? 'لوميا LUMÉA' : 'LUMÉA'}
               </Link>
 
               <button

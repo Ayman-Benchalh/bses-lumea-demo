@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Locale, ProductCategory, SkinConcern, FragranceFamily } from '@/types';
 import { getTranslations } from '@/i18n/translations';
@@ -39,6 +39,23 @@ export default function ShopPage({ params: { locale } }: Props) {
   const [onSaleOnly, setOnSaleOnly] = useState(false);
   const [sortBy, setSortBy] = useState<'featured' | 'priceAsc' | 'priceDesc' | 'newest' | 'rating'>('featured');
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
+
+  // Lock body scroll and handle ESC key when mobile filter drawer is open
+  useEffect(() => {
+    if (mobileFilterOpen) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setMobileFilterOpen(false);
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [mobileFilterOpen]);
 
   // Categories definition
   const categories: { key: ProductCategory | 'all'; label: string }[] = [

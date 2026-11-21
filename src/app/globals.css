@@ -40,11 +40,17 @@ h1, h2, h3, .font-editorial {
   letter-spacing: 0;
 }
 
-/* Base Body Styles */
+/* Base HTML & Body Styles */
+html {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 body {
   background-color: #FFFDFC;
   color: #43322F;
   overflow-x: hidden;
+  max-width: 100%;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }

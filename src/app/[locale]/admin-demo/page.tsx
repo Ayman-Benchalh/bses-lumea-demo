@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Locale, Product, Order, OrderStatus, Promotion, Bundle, ProductCategory } from '@/types';
@@ -77,6 +77,26 @@ export default function AdminDemoPage({ params: { locale } }: Props) {
     0
   );
   const lowStockCount = products.filter((p) => p.stock <= 5).length;
+
+  // Lock body scroll and handle ESC key when any modal is open
+  useEffect(() => {
+    if (isAddProductOpen || editingProduct) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          setIsAddProductOpen(false);
+          setEditingProduct(null);
+        }
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isAddProductOpen, editingProduct]);
 
   // New Product Draft Form State
   const [newProd, setNewProd] = useState<Partial<Product>>({
@@ -340,8 +360,8 @@ export default function AdminDemoPage({ params: { locale } }: Props) {
             </button>
           </div>
 
-          {/* Products Table */}
-          <div className="p-4 sm:p-6 rounded-3xl bg-pearl-white border border-rose-border/40 shadow-subtle overflow-x-auto">
+          {/* Products Table (Desktop/Tablet) */}
+          <div className="hidden md:block p-4 sm:p-6 rounded-3xl bg-pearl-white border border-rose-border/40 shadow-subtle overflow-x-auto">
             <table className="w-full text-xs text-start">
               <thead>
                 <tr className="border-b border-rose-border/30 text-espresso-muted">
@@ -430,6 +450,74 @@ export default function AdminDemoPage({ params: { locale } }: Props) {
                 ))}
               </tbody>
             </table>
+          </div>
+
+          {/* Products Management Cards (Mobile) */}
+          <div className="md:hidden space-y-3">
+            {products.map((prod) => (
+              <div
+                key={prod.id}
+                className="p-4 rounded-2xl bg-pearl-white border border-rose-border/50 shadow-subtle space-y-3"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-rose-mist shrink-0 border border-rose-border/30">
+                    {prod.images[0] && (
+                      <Image
+                        src={prod.images[0]}
+                        alt={prod.name[locale] || prod.name.fr}
+                        fill
+                        sizes="56px"
+                        className="object-cover"
+                      />
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="font-semibold text-espresso text-sm block truncate">
+                      {prod.name[locale] || prod.name.fr}
+                    </span>
+                    <span className="text-[11px] text-espresso-muted block">
+                      {prod.volume} • <span className="uppercase font-medium text-rose-dusty">{prod.category}</span>
+                    </span>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="font-bold text-xs text-espresso">
+                        {prod.discountPriceMad ? `${prod.discountPriceMad} MAD` : `${prod.priceMad} MAD`}
+                      </span>
+                      <span
+                        className={`font-semibold px-2 py-0.5 rounded-full text-[10px] ${
+                          prod.stock <= 5
+                            ? 'bg-amber-100 text-amber-800'
+                            : 'bg-emerald-100 text-emerald-800'
+                        }`}
+                      >
+                        {prod.stock} en stock
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-end gap-2 pt-2 border-t border-rose-border/20">
+                  <button
+                    onClick={() => setEditingProduct(prod)}
+                    className="touch-target px-3 py-1.5 rounded-xl text-espresso bg-sand-warm/60 hover:bg-sand-warm text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                  >
+                    <Pencil className="w-3.5 h-3.5" />
+                    <span>Modifier</span>
+                  </button>
+                  <button
+                    onClick={() => {
+                      if (confirm(t.admin.deleteConfirm)) {
+                        deleteProduct(prod.id);
+                        showToast('Produit supprimé du catalogue');
+                      }
+                    }}
+                    className="touch-target px-3 py-1.5 rounded-xl text-semantic-error bg-red-50 hover:bg-red-100 text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span>Supprimer</span>
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}

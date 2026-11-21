@@ -127,7 +127,7 @@ export default function ProductDetailPage({ params: { locale, slug } }: Props) {
           )}
 
           {/* Main Large Visual */}
-          <div className="relative flex-1 aspect-[4/5] rounded-3xl overflow-hidden bg-rose-mist/30 border border-rose-border shadow-card">
+          <div className="relative flex-1 aspect-[4/5] max-h-[420px] sm:max-h-none rounded-3xl overflow-hidden bg-rose-mist/30 border border-rose-border shadow-card">
             {product.images[selectedImageIndex] ? (
               <Image
                 src={product.images[selectedImageIndex]}

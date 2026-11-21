@@ -146,12 +146,12 @@ export function ProductCard({ product, locale }: Props) {
           </div>
 
           <Link href={`/${locale}/product/${product.slug}`} className="block">
-            <h3 className="font-editorial text-lg sm:text-xl font-medium text-espresso group-hover:text-rose-deep transition-colors line-clamp-1">
+            <h3 className="font-editorial text-lg sm:text-xl font-medium text-espresso group-hover:text-rose-deep transition-colors line-clamp-2 min-h-[2.8rem] sm:min-h-[3rem] leading-snug">
               {product.name[locale] || product.name.fr}
             </h3>
           </Link>
 
-          <p className="text-xs text-espresso-muted line-clamp-2 leading-relaxed">
+          <p className="text-xs text-espresso-muted line-clamp-2 leading-relaxed min-h-[2.25rem]">
             {product.subtitle[locale] || product.subtitle.fr}
           </p>
         </div>

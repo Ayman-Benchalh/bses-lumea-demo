@@ -43,7 +43,7 @@ export default function LocaleLayout({ children, params: { locale } }: Props) {
           onOpenCart={() => setIsCartOpen(true)}
         />
 
-        <main className="flex-1 flex flex-col">
+        <main className="flex-1 flex flex-col overflow-x-hidden w-full">
           {children}
         </main>
 

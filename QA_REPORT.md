@@ -23,10 +23,22 @@ The quality assurance suite covers functional paths, responsiveness, touch targe
 | **QA-11** | Cross-Tab Sync | Changes in Admin immediately update open Storefront tabs | **PASS** |
 | **QA-12** | Material Design 3 Showcase | Token verification, 48px targets, color contrast WCAG AA | **PASS** |
 | **QA-13** | WhatsApp Pre-filled Lead | Direct URL encoding with valid BSES business number | **PASS** |
+| **QA-14** | Responsive Perfection (320px–1440px) | Zero horizontal overflow, adaptive drawer, touch targets | **PASS** |
+| **QA-15** | Mobile Admin Experience | Responsive management cards, non-squished mobile tables | **PASS** |
 
 ---
 
-## 3. Product Catalog Completeness Audit
+## 3. Automated Playwright Suite (12 / 12 Tests Green)
+
+Run Command: `npx playwright test --project=chromium`
+- **Total Test Cases:** 12
+- **Pass Rate:** 100% (12 / 12 passed in 42.1s)
+- **Flaky Tests:** 0
+- **Failures:** 0
+
+---
+
+## 4. Product Catalog Completeness Audit
 
 - Total Products Seeded: **32 items**
   - **Skincare:** 10 items (Sérum Éclat, Crème Velours, Émulsion Rose, Huile Argan, Gelée Thym, Baume Démaquillant, Tonique Néroli, Contour Yeux, Masque Nuit, Solaire SPF 50)

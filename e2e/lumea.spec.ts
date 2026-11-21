@@ -223,4 +223,33 @@ test.describe('LUMÉA E-commerce Experience & BSES Showcase', () => {
     expect(href).toContain('wa.me/212694991485');
     expect(href).toContain('Bonjour%20BSES');
   });
+
+  test('12. Responsive Viewport Perfection & Zero Horizontal Overflow (320px, 390px, 768px, 1440px)', async ({ page }) => {
+    const viewports = [
+      { width: 320, height: 568 },
+      { width: 390, height: 844 },
+      { width: 768, height: 1024 },
+      { width: 1440, height: 900 },
+    ];
+
+    for (const vp of viewports) {
+      await page.setViewportSize(vp);
+      await page.goto('/fr');
+
+      // Verify no horizontal document overflow
+      const hasOverflow = await page.evaluate(() => {
+        return document.documentElement.scrollWidth > document.documentElement.clientWidth;
+      });
+      expect(hasOverflow).toBe(false);
+
+      if (vp.width >= 1280) {
+        // Desktop nav should be visible, hamburger hidden
+        await expect(page.locator('button[aria-label="Menu"]')).not.toBeVisible();
+        await expect(page.locator('nav').first()).toBeVisible();
+      } else {
+        // Mobile / Tablet: hamburger visible
+        await expect(page.locator('button[aria-label="Menu"]')).toBeVisible();
+      }
+    }
+  });
 });

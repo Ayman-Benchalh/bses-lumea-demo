@@ -92,12 +92,14 @@ export default function HomePage({ params: { locale } }: Props) {
   ];
 
   return (
-    <div className="flex flex-col gap-16 sm:gap-24 pb-20">
+    <div className="flex flex-col gap-16 sm:gap-24 pb-20 overflow-x-hidden w-full max-w-full">
       {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-rose-mist/60 via-sand-light/40 to-pearl-white pt-8 pb-16 sm:pt-16 sm:pb-24">
+      <section className="relative overflow-hidden bg-gradient-to-b from-rose-mist/60 via-sand-light/40 to-pearl-white pt-8 pb-16 sm:pt-16 sm:pb-24 w-full">
         {/* Subtle decorative atmosphere */}
-        <div className="absolute top-0 end-0 -translate-y-12 translate-x-12 w-96 h-96 rounded-full bg-rose-dusty/10 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 start-0 translate-y-12 -translate-x-12 w-96 h-96 rounded-full bg-sand-warm/30 blur-3xl pointer-events-none" />
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 end-0 -translate-y-12 translate-x-12 w-96 h-96 rounded-full bg-rose-dusty/10 blur-3xl" />
+          <div className="absolute bottom-0 start-0 translate-y-12 -translate-x-12 w-96 h-96 rounded-full bg-sand-warm/30 blur-3xl" />
+        </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">

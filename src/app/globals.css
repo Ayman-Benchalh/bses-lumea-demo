@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-arabic: 'Noto Sans Arabic', 'Traditional Arabic', Tahoma, sans-serif;
+
+  /* Material Design 3 & Brand Tokens */
+  --color-rose-mist: #F7E9E5;
+  --color-dusty-rose: #C78D9D;
+  --color-warm-sand: #EEE2D0;
+  --color-espresso: #43322F;
+  --color-pearl-white: #FFFDFC;
+  --color-sage: #9CAC9C;
+
+  --touch-target-min: 48px;
+}
+
+[dir="rtl"] {
+  font-family: var(--font-arabic), system-ui, sans-serif;
+}
+
+[dir="ltr"] {
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+h1, h2, h3, .font-editorial {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] .font-editorial {
+  font-family: var(--font-arabic), system-ui, sans-serif;
+  letter-spacing: 0;
+}
+
+/* Base Body Styles */
+body {
+  background-color: #FFFDFC;
+  color: #43322F;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Material Design 3 Interaction & Touch targets */
+.touch-target {
+  min-height: var(--touch-target-min);
+  min-width: var(--touch-target-min);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Glass & Sensory Effects */
+.glass-panel {
+  background: rgba(255, 253, 252, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(234, 214, 208, 0.45);
+}
+
+.glass-dark {
+  background: rgba(67, 50, 47, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(199, 141, 157, 0.25);
+}
+
+.caustic-gradient {
+  background: radial-gradient(circle at 20% 30%, rgba(247, 233, 229, 0.85) 0%, rgba(238, 226, 208, 0.4) 50%, rgba(255, 253, 252, 0.95) 100%);
+}
+
+.thermal-gradient {
+  background: linear-gradient(135deg, #F7E9E5 0%, #FAF0EE 40%, #EEE2D0 100%);
+}
+
+.shimmer-gold {
+  background: linear-gradient(90deg, #EEE2D0 0%, #FFFDFC 50%, #EEE2D0 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Fluted Glass effect */
+.fluted-glass {
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 253, 252, 0.6) 0px,
+    rgba(255, 253, 252, 0.6) 2px,
+    rgba(247, 233, 229, 0.3) 3px,
+    rgba(247, 233, 229, 0.3) 6px
+  );
+  backdrop-filter: blur(8px);
+}
+
+/* Accessibility Focus States */
+:focus-visible {
+  outline: 2px solid #C78D9D;
+  outline-offset: 2px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

@@ -34,3 +34,4 @@ All refinements adhere to Material Design 3 measurement, interaction, and touch-
 - **Rhythm & Spacing Scale:** 4px, 8px, 12px, 16px, 24px, 32px, 48px, 64px, 96px rhythm applied uniformly across sections.
 - **Color Contrast:** Espresso text (`#43322F`) on Pearl White (`#FFFDFC`) and Rose Mist (`#F7E9E5`) achieves WCAG AAA contrast ratio ($\ge 7.8:1$).
 - **Motion & Reduced Motion:** All transitions respect `prefers-reduced-motion: reduce` with instantaneous fallback ($0.01\text{ms}$).
+

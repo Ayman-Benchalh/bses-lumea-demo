@@ -40,3 +40,4 @@ All target screen resolutions specified in the Master Prompt were verified for z
    - At $< 768\text{px}$, tables morph into high-density management cards with thumbnail images, stock status pills, and prominent touch-friendly action buttons.
 4. **Multilingual & RTL Integrity:**
    - Verified on Arabic locale (`/ar`): entire header, drawer, product cards, checkout fields, and floating widgets mirror properly along the inline-start / inline-end axes using CSS logical properties (`start-`, `end-`, `ps-`, `pe-`).
+
